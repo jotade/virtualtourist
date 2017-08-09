@@ -41,6 +41,7 @@ struct CoreDataStack {
         // create a context and add connect it to the coordinator
         context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.persistentStoreCoordinator = coordinator
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         
         // Add a SQLite store located in the documents folder
         let fm = FileManager.default

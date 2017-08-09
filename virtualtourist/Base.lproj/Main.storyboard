@@ -49,7 +49,7 @@
                     <navigationItem key="navigationItem" id="B8W-J2-co1"/>
                     <connections>
                         <outlet property="mapView" destination="HkW-NU-dJq" id="egC-HI-Gzh"/>
-                        <segue destination="tLY-8W-WJ5" kind="show" identifier="showPhotos" id="lLv-Qi-Zve"/>
+                        <segue destination="tLY-8W-WJ5" kind="show" identifier="showPinPhotos" id="lLv-Qi-Zve"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -81,19 +81,34 @@
                                 <rect key="frame" x="0.0" y="192" width="375" height="415"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ja9-5p-Xu1">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="120" height="120"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="MKC-3i-CKn">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="photoCell" id="MKC-3i-CKn" customClass="PhotoCollectionCell" customModule="virtualtourist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XhX-oA-ImW">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
+                                                </imageView>
+                                            </subviews>
                                         </view>
+                                        <color key="backgroundColor" red="0.43020935799999999" green="1" blue="0.92433651969999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="XhX-oA-ImW" firstAttribute="top" secondItem="MKC-3i-CKn" secondAttribute="top" id="AD6-kL-pjf"/>
+                                            <constraint firstAttribute="bottom" secondItem="XhX-oA-ImW" secondAttribute="bottom" id="de1-uv-uA5"/>
+                                            <constraint firstAttribute="trailing" secondItem="XhX-oA-ImW" secondAttribute="trailing" id="rBq-uM-SU9"/>
+                                            <constraint firstItem="XhX-oA-ImW" firstAttribute="leading" secondItem="MKC-3i-CKn" secondAttribute="leading" id="zNI-Dc-BHF"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="XhX-oA-ImW" id="hqv-nJ-aVo"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>

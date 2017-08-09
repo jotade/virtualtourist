@@ -37,7 +37,7 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate{
         
         for pin in savedPins {
             
-            addAnnotation(coordinate: CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude ))
+            addAnnotation(pin: pin)
         }
     }
     
@@ -67,25 +67,25 @@ class MapViewController: UIViewController, UIGestureRecognizerDelegate{
         let touchPoint = sender.location(in: mapView)
         let touchCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
 
-        addAnnotation(coordinate: touchCoordinate)
+        let pin = savePin(coordinate: touchCoordinate)
+        
+        addAnnotation(pin: pin)
     }
     
-    func addAnnotation(coordinate: CLLocationCoordinate2D) {
+    func addAnnotation(pin: Pin) {
         
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        //annotation.title = "Event place"
-        savePin(coordinate: coordinate)
+        let annotation = Place(pin: pin, coordinate: CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude))
         
         mapView.addAnnotation(annotation)
     }
     
-    func savePin(coordinate: CLLocationCoordinate2D ){
+    func savePin(coordinate: CLLocationCoordinate2D ) -> Pin {
         let pin = NSEntityDescription.insertNewObject(forEntityName: "Pin", into: stack.context) as! Pin
         pin.latitude = coordinate.latitude
         pin.longitude = coordinate.longitude
         
         try? stack.saveContext()
+        return pin
     }
     
     func photosRequest(){
@@ -103,11 +103,40 @@ extension MapViewController: MKMapViewDelegate {
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID) as? MKPinAnnotationView
         if(pinView == nil) {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
-            //pinView!.canShowCallout = true
             pinView!.animatesDrop = true
         }
         return pinView
     }
     
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        let pinAnnotation = view.annotation as! Place
+        
+        DataService.fetchPhotos(for: pinAnnotation.pin!, coordinate: pinAnnotation.coordinate) { (error, photos) in
+            
+            if error == nil{
+                try? stack.saveContext()
+            }
+        }
+
+        performSegue(withIdentifier: "showPinPhotos", sender: view.annotation)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let an = sender as! Place
+        let vc = segue.destination as! PinPhotosViewController
+        vc.pin = an.pin
+    }
+}
+
+class Place: NSObject, MKAnnotation {
+    var pin: Pin?
+    var coordinate: CLLocationCoordinate2D
+    
+    init(pin: Pin, coordinate: CLLocationCoordinate2D) {
+        
+        self.pin = pin
+        self.coordinate = coordinate
+    }
 }
 
