@@ -1,5 +1,5 @@
 //
-//  DataService.swift
+//  FlickrDataService.swift
 //  virtualtourist
 //
 //  Created by IM Development on 8/9/17.
@@ -18,9 +18,9 @@ class FlickrDataService {
     static let invalidAccessErrorCode = 100
     
     
-    class func fetchPhotos(for pin:Pin, coordinate: CLLocationCoordinate2D, onCompletion: @escaping response) -> Void {
+    class func fetchPhotos(for pin:Pin, onCompletion: @escaping response) -> Void {
         
-        let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(flickrKey)&accuracy=16&lat=\(coordinate.latitude)&lon=\(coordinate.longitude)&per_page=10&page=2&format=json&nojsoncallback=1"
+        let urlString: String = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(flickrKey)&accuracy=16&lat=\(pin.latitude)&lon=\(pin.longitude)&per_page=12&page=\(pin.photoSet)&format=json&nojsoncallback=1"
         let url: NSURL = NSURL(string: urlString)!
         let searchTask = URLSession.shared.dataTask(with: url as URL, completionHandler: {data, response, error -> Void in
             

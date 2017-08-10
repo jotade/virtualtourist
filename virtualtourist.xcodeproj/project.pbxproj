@@ -15,9 +15,9 @@
 		45957E8C1F3B4B95004152BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45957E8A1F3B4B95004152BE /* LaunchScreen.storyboard */; };
 		45957E961F3B4CB6004152BE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45957E951F3B4CB6004152BE /* CoreDataStack.swift */; };
 		45957E981F3B5C97004152BE /* PinPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45957E971F3B5C97004152BE /* PinPhotosViewController.swift */; };
-		45957E9A1F3B94EB004152BE /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45957E991F3B94EB004152BE /* DataService.swift */; };
-		45957E9C1F3BA05A004152BE /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45957E9B1F3BA05A004152BE /* Photo.swift */; };
+		45957E9A1F3B94EB004152BE /* FlickrDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45957E991F3B94EB004152BE /* FlickrDataService.swift */; };
 		45957E9E1F3BB00D004152BE /* PhotoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45957E9D1F3BB00D004152BE /* PhotoCollectionCell.swift */; };
+		45957EA01F3BF8ED004152BE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45957E9F1F3BF8ED004152BE /* Place.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +31,9 @@
 		45957E8D1F3B4B95004152BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45957E951F3B4CB6004152BE /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		45957E971F3B5C97004152BE /* PinPhotosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinPhotosViewController.swift; sourceTree = "<group>"; };
-		45957E991F3B94EB004152BE /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
-		45957E9B1F3BA05A004152BE /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		45957E991F3B94EB004152BE /* FlickrDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrDataService.swift; sourceTree = "<group>"; };
 		45957E9D1F3BB00D004152BE /* PhotoCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCollectionCell.swift; sourceTree = "<group>"; };
+		45957E9F1F3BF8ED004152BE /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,20 +66,60 @@
 		45957E7D1F3B4B95004152BE /* virtualtourist */ = {
 			isa = PBXGroup;
 			children = (
+				45957EA51F3CE8AE004152BE /* assets */,
+				45957EA41F3CE841004152BE /* services */,
+				45957EA31F3CE833004152BE /* model */,
+				45957EA21F3CE82A004152BE /* views */,
+				45957EA11F3CE81F004152BE /* controllers */,
 				45957E7E1F3B4B95004152BE /* AppDelegate.swift */,
-				45957E801F3B4B95004152BE /* MapViewController.swift */,
-				45957E821F3B4B95004152BE /* Main.storyboard */,
-				45957E881F3B4B95004152BE /* Assets.xcassets */,
-				45957E8A1F3B4B95004152BE /* LaunchScreen.storyboard */,
 				45957E8D1F3B4B95004152BE /* Info.plist */,
-				45957E851F3B4B95004152BE /* virtualtourist.xcdatamodeld */,
-				45957E951F3B4CB6004152BE /* CoreDataStack.swift */,
-				45957E971F3B5C97004152BE /* PinPhotosViewController.swift */,
-				45957E991F3B94EB004152BE /* DataService.swift */,
-				45957E9B1F3BA05A004152BE /* Photo.swift */,
-				45957E9D1F3BB00D004152BE /* PhotoCollectionCell.swift */,
 			);
 			path = virtualtourist;
+			sourceTree = "<group>";
+		};
+		45957EA11F3CE81F004152BE /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				45957E801F3B4B95004152BE /* MapViewController.swift */,
+				45957E971F3B5C97004152BE /* PinPhotosViewController.swift */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		45957EA21F3CE82A004152BE /* views */ = {
+			isa = PBXGroup;
+			children = (
+				45957E9D1F3BB00D004152BE /* PhotoCollectionCell.swift */,
+				45957E9F1F3BF8ED004152BE /* Place.swift */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		45957EA31F3CE833004152BE /* model */ = {
+			isa = PBXGroup;
+			children = (
+				45957E851F3B4B95004152BE /* virtualtourist.xcdatamodeld */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		45957EA41F3CE841004152BE /* services */ = {
+			isa = PBXGroup;
+			children = (
+				45957E991F3B94EB004152BE /* FlickrDataService.swift */,
+				45957E951F3B4CB6004152BE /* CoreDataStack.swift */,
+			);
+			name = services;
+			sourceTree = "<group>";
+		};
+		45957EA51F3CE8AE004152BE /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				45957E881F3B4B95004152BE /* Assets.xcassets */,
+				45957E8A1F3B4B95004152BE /* LaunchScreen.storyboard */,
+				45957E821F3B4B95004152BE /* Main.storyboard */,
+			);
+			name = assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,12 +195,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45957E9C1F3BA05A004152BE /* Photo.swift in Sources */,
 				45957E811F3B4B95004152BE /* MapViewController.swift in Sources */,
 				45957E9E1F3BB00D004152BE /* PhotoCollectionCell.swift in Sources */,
 				45957E871F3B4B95004152BE /* virtualtourist.xcdatamodeld in Sources */,
 				45957E981F3B5C97004152BE /* PinPhotosViewController.swift in Sources */,
-				45957E9A1F3B94EB004152BE /* DataService.swift in Sources */,
+				45957E9A1F3B94EB004152BE /* FlickrDataService.swift in Sources */,
+				45957EA01F3BF8ED004152BE /* Place.swift in Sources */,
 				45957E7F1F3B4B95004152BE /* AppDelegate.swift in Sources */,
 				45957E961F3B4CB6004152BE /* CoreDataStack.swift in Sources */,
 			);
