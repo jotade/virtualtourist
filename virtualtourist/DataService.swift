@@ -10,12 +10,8 @@ import Foundation
 import MapKit
 import CoreData
 
-class DataService {
-    
-    let instance = DataService()
-    var page = 0
-    private init(){}
-    
+class FlickrDataService {
+
     typealias response = (NSError?, [Photo]?) -> Void
     
     static let flickrKey = "ee7b60d0ae2cb5acbe51aa9a75362e51"

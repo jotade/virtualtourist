@@ -14,27 +14,35 @@ class PhotoCollectionCell: UICollectionViewCell {
     
     var photo: Photo?{
         didSet{
-            imageView.imageFromServerURL(urlString: photo!.photoURL!)
+            loadImage(photo: photo!)
         }
     }
-}
-
-
-extension UIImageView {
     
-    public func imageFromServerURL(urlString: String) {
+    func loadImage(photo: Photo) {
         
-        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+        if let pic = photo.photo {
             
-            if error != nil {
-                print(error!.localizedDescription)
-                return
-            }
-            DispatchQueue.main.async(execute: { () -> Void in
-                let image = UIImage(data: data!)
-                self.image = image
-            })
+            let image = UIImage(data: pic as Data)
+            imageView.image = image
             
-        }).resume()
+        }else{
+            
+            URLSession.shared.dataTask(with: NSURL(string: photo.photoURL!)! as URL, completionHandler: { (data, response, error) -> Void in
+                
+                if error != nil {
+                    print(error!.localizedDescription)
+                    return
+                }
+                
+                photo.photo = data! as NSData
+                
+                DispatchQueue.main.async(execute: { () -> Void in
+                    
+                    let image = UIImage(data: data!)
+                    self.imageView.image = image
+                })
+                
+            }).resume()
+        }
     }
 }

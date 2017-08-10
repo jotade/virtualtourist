@@ -112,13 +112,16 @@ extension MapViewController: MKMapViewDelegate {
         
         let pinAnnotation = view.annotation as! Place
         
-        DataService.fetchPhotos(for: pinAnnotation.pin!, coordinate: pinAnnotation.coordinate) { (error, photos) in
+        if pinAnnotation.pin?.photos?.count == 0{
             
-            if error == nil{
-                try? stack.saveContext()
+            FlickrDataService.fetchPhotos(for: pinAnnotation.pin!, coordinate: pinAnnotation.coordinate) { (error, photos) in
+                
+                if error == nil{
+                    try? stack.saveContext()
+                }
             }
         }
-
+        
         performSegue(withIdentifier: "showPinPhotos", sender: view.annotation)
     }
     
